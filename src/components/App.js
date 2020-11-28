@@ -52,7 +52,7 @@ function App() {
     <Header />
     <Main onEditProfile = {openEditProfile} onAddPlace = {openAddPlace} onEditAvatar = {openEditAvatar}
     profileName = {userName} profileDescription = {userDescription} userAvatar = {userAvatar}
-    cardList = {cards.map((card) => <Card card = {card} onCardClick = {handleCardClick} />)} />
+    cardList = {cards.map((card) => <Card card = {card} onCardClick = {handleCardClick} key = {card._id} />)} />
     <Footer />
   </div>
   <PopupWithForm name = "popup_edit" title = "Редактировать профиль" isOpen = {isEditProfilePopupOpen}

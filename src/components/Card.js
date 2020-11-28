@@ -1,6 +1,6 @@
 export default function Card(props) {
   return (
-    <li className="element" key = {props.card._id}>
+    <li className="element">
       <button type="button" className="element__delete-button"></button>
       <img className="element__image" src = {props.card.link} alt = {props.card.name} onClick = {() => {
         props.onCardClick({
