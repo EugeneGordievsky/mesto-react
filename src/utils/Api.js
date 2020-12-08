@@ -23,7 +23,7 @@ class Api {
       headers: this._options.headers,
       body: JSON.stringify({
         name: item.name,
-        about: item.job
+        about: item.about
       })
     })
     .then((res) => this._checkResponse(res))
@@ -67,21 +67,21 @@ class Api {
     .then((res) => this._checkResponse(res))
   };
 
-  getLikeFunc(id) {
-    return fetch(this._options.baseUrl + "/cards/likes/" + id, {
-      method: "PUT",
-      headers: this._options.headers
-    })
-    .then((res) => this._checkResponse(res))
-  };
-
-  deleteLikeFunc(id) {
-    return fetch(this._options.baseUrl + "/cards/likes/" + id, {
-      method: "DELETE",
-      headers: this._options.headers
-    })
-    .then((res) => this._checkResponse(res))
-  };
+  changeLikeCardStatus(id, isLiked) {
+    if (isLiked) {
+      return fetch(this._options.baseUrl + "/cards/likes/" + id, {
+        method: "PUT",
+        headers: this._options.headers
+      })
+      .then((res) => this._checkResponse(res))
+    } else {
+      return fetch(this._options.baseUrl + "/cards/likes/" + id, {
+        method: "DELETE",
+        headers: this._options.headers
+      })
+      .then((res) => this._checkResponse(res))
+    }
+  }
 
   isLoading(button, isLoad) {
     if(isLoad) {

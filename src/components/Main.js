@@ -1,13 +1,18 @@
+import React from 'react';
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
+
 export default function Main(props) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <main className="content">
       <section className="profile">
-        <img className="profile__avatar" alt="Аватар профиля" src = {props.userAvatar} />
+        <img className="profile__avatar" alt="Аватар профиля" src={currentUser.userAvatar} />
         <button className="profile__avatar-button" type="button" onClick = {() => props.onEditAvatar(true)}></button>
         <div className="profile__info">
-          <h1 className="profile__name">{props.profileName}</h1>
+          <h1 className="profile__name">{currentUser.userName}</h1>
           <button className="profile__edit-button" type="button" onClick = {() => props.onEditProfile(true)}></button>
-          <p className="profile__job">{props.profileDescription}</p>
+          <p className="profile__job">{currentUser.userDescription}</p>
         </div>
         <button className="add-button" type="button" onClick = {() => props.onAddPlace(true)}></button>
       </section>
