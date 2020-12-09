@@ -8,8 +8,8 @@ export default function EditProfilePopup(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
-    setName(currentUser.userName);
-    setDescription(currentUser.userDescription);
+      setName(currentUser.name);
+      setDescription(currentUser.about);
   }, [currentUser]);
 
   return (<PopupWithForm name = "popup_edit" title = "Редактировать профиль" isOpen = {props.isOpen}

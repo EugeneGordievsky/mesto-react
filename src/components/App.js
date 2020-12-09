@@ -16,14 +16,17 @@ function App() {
   const [isAddPlacePopupOpen, openAddPlace] = React.useState(false);
   const [isEditAvatarPopupOpen, openEditAvatar] = React.useState(false);
   const [cards, setCardsArray] = React.useState([]);
-  const [currentUser, setUserInfo] = React.useState([]);
+  const [currentUser, setUserInfo] = React.useState({
+    name: "",
+    about: ""
+  });
   const [selectedCard, handleCardClick] = React.useState({
     openCard: {},
     isOpen: false
   });
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some(owner => owner._id === currentUser.userId);
+    const isLiked = card.likes.some(owner => owner._id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
     .then((newCard) => {
       const newCards = cards.map((c) => c._id === card._id ? newCard : c);
@@ -43,12 +46,7 @@ function App() {
   const handleUpdateUser = (item) => {
     api.setUserInfo(item)
     .then((userInfo) => {
-      setUserInfo({
-        userName: userInfo.name,
-        userDescription: userInfo.about,
-        userAvatar: userInfo.avatar,
-        userId: userInfo._id
-      })
+      setUserInfo(userInfo);
       closeAllPopups();
     })
     .catch((err) => console.log(err));
@@ -57,12 +55,7 @@ function App() {
   const handleUpdateAvatar = (item) => {
     api.setAvatar(item)
     .then((userInfo) => {
-      setUserInfo({
-        userName: userInfo.name,
-        userDescription: userInfo.about,
-        userAvatar: userInfo.avatar,
-        userId: userInfo._id
-      });
+      setUserInfo(userInfo);
       closeAllPopups();
     })
     .catch((err) => console.log(err));
@@ -96,12 +89,7 @@ function App() {
   React.useEffect(() => {
     api.getUserInfo()
     .then((userInfo) => {
-      setUserInfo({
-        userName: userInfo.name,
-        userDescription: userInfo.about,
-        userAvatar: userInfo.avatar,
-        userId: userInfo._id
-      })
+      setUserInfo(userInfo)
     })
     .catch((err) => console.log(err))
   }, []);
